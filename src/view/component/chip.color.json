@@ -1,0 +1,5 @@
+{
+  "javascript": {"color": "#323330", "bg": "#f0db4f"},
+  "react": {"color": "#282c34", "bg": "#61dafb"},
+  "mui": {"color": "#ffffff", "bg": "#f44336"}
+}

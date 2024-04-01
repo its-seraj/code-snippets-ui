@@ -36,6 +36,7 @@ body {
   margin-bottom: 2em;
   min-width: 400px;
   width: fit-content;
+  min-height: 100px;
   /* height: 400px; */
   border-radius: 8px;
   border: 0.5px solid var(--border);
@@ -65,6 +66,7 @@ body {
   right: 10px;
   top: 10px;
   z-index: 10;
+  opacity: 0.99;
 }
 
 .card-action .more {
@@ -81,8 +83,9 @@ body {
 
 .card-action-expanded {
   width: 100px;
-  border-radius: 8px;
   background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
 
 .card-action-expanded .more {
@@ -106,7 +109,7 @@ body {
   gap: 10px;
   cursor: pointer;
   font-size: 12px;
-  box-shadow: 0 0 14px 0 var(--box-shadow);
+  border-radius: 4px;
 }
 
 .action-btn-root>div svg {
@@ -142,20 +145,11 @@ body {
   position: relative;
 }
 
-.editor-btn {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
 .card-body-root img {
-  /* height: 300px; */
   width: 100%;
 }
 
 .card-body-content {
-  /* height: 10vh; */
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -167,15 +161,47 @@ body {
   font-size: 14px;
   color: var(--title-color);
   letter-spacing: 0.5px;
-  text-align: justify;
+}
+
+.card-body-content .sub-header {
+  min-height: 1em;
+  font-size: 12px;
 }
 
 .card-body-content .labels {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
 /* code-editor */
+.run-code-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 5px 14px;
+  border-radius: 8px;
+  opacity: 0.5;
+  /* background-color: aliceblue; */
+}
+
+.run-code-icon:hover {
+  opacity: 0.8;
+}
+
+.ace_editor-root {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ace_editor-root .ace_editor {
+  width: 100% !important;
+  border-block: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+
 iframe .decorationsOverviewRuler {
   width: 4px !important;
 }
@@ -234,7 +260,7 @@ hr {
   width: 1px;
 }
 
-.form-root{
+.form-root {
   margin: 2em;
   width: inherit;
   display: flex;
@@ -250,7 +276,7 @@ hr {
   gap: 20px;
 }
 
-.save-card-btn{
+.save-card-btn {
   margin-top: 2em;
   /* margin-left: auto; */
   padding: 0.6em 0.8em;
@@ -265,11 +291,11 @@ hr {
   box-shadow: 0 0 14px var(--box-shadow);
 }
 
-.save-card-btn:hover{
+.save-card-btn:hover {
   background-color: var(--btn-hover);
 }
 
-.save-card-btn:disabled{
+.save-card-btn:disabled {
   cursor: not-allowed;
   color: var(--skeleton-background);
 }

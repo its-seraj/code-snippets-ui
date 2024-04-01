@@ -2,16 +2,20 @@ import { useState } from "react";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
-import CodeIcon from "@mui/icons-material/Code";
 import BasicModal from "./modal";
 import { Chip } from "@mui/material";
 import chipColorConfig from "./chip.color.json";
+import { RunCodeIcon } from "../../assets/terminal.jsx";
+import { Editor } from "./AceEditor.jsx";
+import { useTheme } from "../../ThemeProvider.jsx";
 
 const Card = (props) => {
-  const { cardDetails } = props;
+  const { cardDetails, cardUx } = props;
   const [moreOpen, setMoreOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState("");
+
+  const { theme } = useTheme();
 
   const toggleMoreButton = () => setMoreOpen((prev) => (prev === false ? true : false));
 
@@ -19,7 +23,7 @@ const Card = (props) => {
     setModalAction(action);
     setModalOpen(true);
   };
-  const labels = ["javascript", "mui", "autocomplete", "react"];
+  const labels = ["javascript", "mui", "autocomplete", "react", "nodejs"];
 
   const handleClick = () => {};
 
@@ -41,28 +45,97 @@ const Card = (props) => {
             </div>
           </div>
         </div>
+
+        <div className="run-code-icon" onClick={() => openModelHandler("editor")}>
+          <RunCodeIcon />
+        </div>
         <div className="card-body-root">
-          <div className="card-image-root">
-            <img src="./assets/img1.png" alt="" />
-            <div className="editor-btn" onClick={() => openModelHandler("editor")}>
-              <CodeIcon />
-            </div>
-          </div>
-          <div className="card-body-content">
-            <div className="header">Fugiat ad magna adipisicing tempor aliquip consequat nulla tempor adipisicing.</div>
-            <div className="labels">
-              {labels?.length > 0 &&
-                labels.map((chip) => {
-                  const bg = chipColorConfig?.[chip] ? chipColorConfig?.[chip].bg + " !important" : "";
-                  const color = chipColorConfig?.[chip] ? chipColorConfig?.[chip].color + " !important" : "";
-                  return (
-                    <>
-                      <Chip label={chip} sx={{ backgroundColor: bg ?? "", color: color ?? "" }} onClick={handleClick} />
-                    </>
-                  );
-                })}
-            </div>
-          </div>
+          {cardUx === 0 && (
+            <>
+              <div className="card-image-root">
+                <img src="./assets/img1.png" alt="" />
+              </div>
+              <div className="card-body-content">
+                <div className="header">Fugiat ad magna adipisicing tempor aliquip consequat nulla tempor adipisicing.</div>
+                <div className="labels">
+                  {labels?.length > 0 &&
+                    labels.map((chip) => {
+                      const bg = chipColorConfig?.[chip] ? chipColorConfig?.[chip].bg + " !important" : "";
+                      const color = chipColorConfig?.[chip] ? chipColorConfig?.[chip].color + " !important" : "";
+                      return (
+                        <>
+                          <Chip label={chip} sx={{ backgroundColor: bg ?? "", color: color ?? "" }} onClick={handleClick} />
+                        </>
+                      );
+                    })}
+                </div>
+              </div>
+            </>
+          )}
+          {cardUx === 1 && (
+            <>
+              <div className="card-body-content">
+                <div className="header" style={{ width: "calc(100% - 50px)" }}>
+                  Fugiat ad magna adipisicing
+                </div>
+                <div className="sub-header">Laboris labore do voluptate anim irure consequat incididunt eu magna duis Lorem.</div>
+                <div className="labels">
+                  {labels?.length > 0 &&
+                    labels.map((chip) => {
+                      const bg = chipColorConfig?.[chip] ? chipColorConfig?.[chip].bg + " !important" : "";
+                      const color = chipColorConfig?.[chip] ? chipColorConfig?.[chip].color + " !important" : "";
+                      return (
+                        <>
+                          <Chip label={chip} sx={{ backgroundColor: bg ?? "", color: color ?? "" }} onClick={handleClick} />
+                        </>
+                      );
+                    })}
+                </div>
+                <div className="run-code-icon" onClick={() => openModelHandler("editor")}>
+                  <RunCodeIcon />
+                </div>
+              </div>
+            </>
+          )}
+          {cardUx === 2 && (
+            <>
+              <div className="card-body-content">
+                <div className="header" style={{ width: "calc(100% - 50px)" }}>
+                  Fugiat ad magna adipisicing
+                </div>
+                {/* <div className="sub-header">Laboris labore do voluptate anim irure consequat incididunt eu magna duis Lorem.</div> */}
+
+                <div className="ace_editor-root">
+                  <Editor
+                    mode="javascript"
+                    dark={theme === "dark"}
+                    // onChange={(e) => {
+                    //    updatejsValue(e);
+                    // }}
+                    editable={false}
+                    value={`const a = 'String'\nfunction yell`}
+                    maxLines={10}
+                  />
+                </div>
+
+                <div className="labels">
+                  {labels?.length > 0 &&
+                    labels.map((chip) => {
+                      const bg = chipColorConfig?.[chip] ? chipColorConfig?.[chip].bg + " !important" : "";
+                      const color = chipColorConfig?.[chip] ? chipColorConfig?.[chip].color + " !important" : "";
+                      return (
+                        <>
+                          <Chip label={chip} sx={{ backgroundColor: bg ?? "", color: color ?? "" }} onClick={handleClick} />
+                        </>
+                      );
+                    })}
+                </div>
+                <div className="run-code-icon" onClick={() => openModelHandler("editor")}>
+                  <RunCodeIcon />
+                </div>
+              </div>
+            </>
+          )}
         </div>
         {modalOpen && <BasicModal modalOpen={modalOpen} setModalOpen={setModalOpen} cardDetails={cardDetails} modalAction={modalAction} />}
       </div>

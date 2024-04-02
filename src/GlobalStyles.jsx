@@ -30,6 +30,7 @@ export const GlobalStyles = (
         },
       },
       ".MuiBox-root": {
+        width: "260px",
         position: "relative",
       },
       ".MuiTextField-root": {
@@ -95,7 +96,37 @@ export const GlobalStyles = (
               borderRadius: "4px",
               "&:hover, &:focus": {
                 backgroundColor: "var(--background)",
-              }
+              },
+            },
+          },
+        },
+      },
+      ".base-Popper-root": {
+        "& .MuiPaper-root": {
+          backgroundColor: "var(--background)",
+          border: "1px solid var(--border)",
+          borderRadius: "8px",
+        },
+      },
+      ".editor": {
+        "& .MuiOutlinedInput-root": {
+          alignItems: "center",
+          opacity: "0.5",
+          "& .MuiInputAdornment-root": {
+            height: "1.5em",
+            width: "1.5em",
+            "& svg": {
+              height: "100%",
+              width: "100%",
+              color: "var(--title-color)",
+            },
+          },
+          "& fieldset": {
+            borderStyle: "dashed !important",
+          },
+          "&:hover, &:active, &focus": {
+            "& fieldset": {
+              borderStyle: "dashed !important",
             },
           },
         },

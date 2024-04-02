@@ -13,11 +13,11 @@ function App() {
       <div className="theme-toggle-button" onClick={toggleTheme}>
         {theme === "dark" ? (
           <span className="material-icons" title="Switch to Light Mode">
-            <ContrastIcon style={{width: "32px", height: "32px"}} />
+            <ContrastIcon style={{width: "4vw", height: "4vw", maxHeight: "24px" }} />
           </span>
         ) : (
           <span className="material-icons" title="Switch to Dark Mode">
-            <ContrastIcon style={{width: "32px", height: "32px"}} />
+            <ContrastIcon style={{width: "4vw", height: "4vw", maxHeight: "24px" }} />
           </span>
         )}
       </div>

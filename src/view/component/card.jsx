@@ -53,7 +53,7 @@ const Card = (props) => {
           {cardUx === 0 && (
             <>
               <div className="card-image-root">
-                <img src="./assets/img1.png" alt="" />
+                <img src="./assets/img2.png" alt="" />
               </div>
               <div className="card-body-content">
                 <div className="header">Fugiat ad magna adipisicing tempor aliquip consequat nulla tempor adipisicing.</div>
@@ -103,7 +103,7 @@ const Card = (props) => {
                 <div className="header" style={{ width: "calc(100% - 50px)" }}>
                   Fugiat ad magna adipisicing
                 </div>
-                {/* <div className="sub-header">Laboris labore do voluptate anim irure consequat incididunt eu magna duis Lorem.</div> */}
+                {cardDetails?.header && <div className="sub-header">Laboris labore do voluptate anim irure consequat incididunt eu magna duis Lorem.</div>}
 
                 <div className="ace_editor-root">
                   <Editor

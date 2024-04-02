@@ -11,8 +11,8 @@ const CardRoot = () => {
         <Card cardUx={0} />
         <Card />
         <Card />
-        <Card cardUx={2} />
         <Card />
+        <Card cardUx={2} />
         <Card />
         <Card />
         <Card />

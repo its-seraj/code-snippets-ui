@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useTheme } from "./../../ThemeProvider";
-import CardForm from "./cardForm";
+import CardForm from "./card-form/cardForm";
 
 const style = {
   position: "absolute",
@@ -15,11 +15,14 @@ const style = {
   outline: "none",
   borderRadius: "12px",
   padding: "2px",
+  "@media (max-width: 820px)": {
+    width: "90vw !important",
+  },
 };
 
 const BasicModal = (props) => {
   console.log("props inside Modal", props);
-  const { modalOpen, setModalOpen, modalAction } = props;
+  const { modalOpen, setModalOpen, modalAction, cardDetails, refresh } = props;
 
   const handleClose = () => setModalOpen(false);
 
@@ -32,12 +35,12 @@ const BasicModal = (props) => {
           <div className="modal-box-root">
             {modalAction === "editor" ? (
               <iframe
-                src={`https://codesandbox.io/embed/ptsqm3?view=preview&module=%2Fsrc%2Findex.tsx&hidenavigation=1&theme=${theme}&fontsize=10`}
+                src={`${cardDetails?.extraFields?.CodeSandbox?.[0]?.value}&hidenavigation=1&theme=${theme}&fontsize=10`}
                 title="Framer Motion: useSpring example (forked)"
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               ></iframe>
             ) : (
-              <CardForm action={modalAction === "card" ? "edit" : "new"} />
+              <CardForm action={modalAction === "card" ? "edit" : "new"} cardDetails={cardDetails} modalOpen={modalOpen} setModalOpen={setModalOpen} refresh={refresh} />
             )}
           </div>
         </Box>

@@ -1,9 +1,9 @@
 import { TextField, InputAdornment } from "@mui/material";
-import { CodeSandboxIcon } from "./../../assets/codesandbox";
+import { CodeSandboxIcon } from "../../../assets/codesandbox.jsx";
 import InsertLinkRoundedIcon from "@mui/icons-material/InsertLinkRounded";
-import { Editor } from "./AceEditor.jsx";
-import { useTheme } from "../../ThemeProvider.jsx";
-import { debounce } from "../helper/debounce";
+import { Editor } from "../AceEditor.jsx";
+import { useTheme } from "../../../ThemeProvider.jsx";
+import { debounce } from "../../helper/debounce.jsx";
 
 const ExtraFields = (props) => {
   const { extraFields, setExtraFields } = props;
@@ -22,7 +22,11 @@ const ExtraFields = (props) => {
   const onChangeHandler = (option, value, index) => {
     setExtraFields((prev) => {
       const updatedOption = [...prev[option]];
-      updatedOption[index] = { ...updatedOption[index], value: value };
+      if (option === "Editor") {
+        updatedOption[index] = { ...updatedOption[index], value: value, language: "javascript" };
+      } else {
+        updatedOption[index] = { ...updatedOption[index], value: value };
+      }
       return { ...prev, [option]: updatedOption };
     });
   };
@@ -37,11 +41,11 @@ const ExtraFields = (props) => {
                 <Editor
                   mode="javascript"
                   dark={theme === "dark"}
-                  // onChange={(e) => {
-                  //    updatejsValue(e);
-                  // }}
+                  onChange={(e) => {
+                    onChangeHandler("Editor", e, index);
+                  }}
                   editable={true}
-                  value={`const a = 'String'\nfunction yell`}
+                  value={currEditor?.value}
                   maxLines={10}
                 />
               </div>
@@ -58,8 +62,8 @@ const ExtraFields = (props) => {
               className="editor"
               label=""
               value={currEditor?.value}
-              onChange={(event) => onChangeHandler("Editor", event.target.value, index)}
-              placeholder="Embed URL"
+              onChange={(event) => onChangeHandler("CodeSandbox", event.target.value, index)}
+              placeholder="Embed URL e.g. https://codesandbox.io/embed/"
               autoComplete="off"
               InputProps={{
                 startAdornment: (
@@ -83,8 +87,8 @@ const ExtraFields = (props) => {
               className="editor"
               label=""
               value={currEditor?.value}
-              onChange={(event) => onChangeHandler("Editor", event.target.value, index)}
-              placeholder="Enter URL"
+              onChange={(event) => onChangeHandler("URL's", event.target.value, index)}
+              placeholder="Enter URL e.g. https://example.io/"
               autoComplete="off"
               InputProps={{
                 startAdornment: (

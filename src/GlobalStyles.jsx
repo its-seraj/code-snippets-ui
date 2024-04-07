@@ -20,6 +20,64 @@ export const GlobalStyles = (
           },
         },
       },
+      ".admin-menu-root": {
+        position: "absolute",
+        left: "0",
+        top: "5vh",
+        zIndex: "1301",
+        "& .MuiIconButton-root": {
+          marginLeft: "-4px",
+          padding: "4px",
+          borderRadius: "0 8px 8px 0",
+          border: "1px solid var(--border)",
+          borderLeft: "none",
+          backgroundColor: "var(--background)",
+          "&:hover, &:focus": {
+            // borderBottom: "none !important",
+            backgroundColor: "var(--background)",
+          },
+        },
+        "& .MuiIconButton-root[aria-expanded=true]": {
+          borderBottomRightRadius: "0",
+          borderBottom: "none",
+        },
+        "& svg": {
+          color: "var(--title-color)",
+          opacity: "0.5",
+        },
+      },
+      ".admin-menu": {
+        "& .MuiMenu-paper": {
+          left: "0 !important",
+          marginTop: "-1.5px",
+          color: "var(--title-color)",
+          border: "1px solid var(--border)",
+          borderLeft: "none",
+          borderRadius: "0 8px 8px 0",
+          backgroundColor: "var(--background) !important",
+          "& .MuiMenu-list": {
+            display: "grid",
+            // gap: "10px",
+            padding: "4px",
+          },
+          "& .MuiMenuItem-root": {
+            padding: "10px",
+            fontSize: "14px",
+            fontWeight: "600",
+            fontFamily: "'Fira Code', monospace",
+            borderRadius: "8px",
+            gap: "1em",
+            opacity: "0.5",
+            "& svg": {
+              height: "0.9em",
+              width: "0.9em",
+            },
+            "&:hover": {
+              opacity: "0.8",
+            },
+          },
+        },
+      },
       ".MuiChip-root": {
         color: "var(--label-color) !important",
         backgroundColor: "var(--label-background) !important",
@@ -128,6 +186,25 @@ export const GlobalStyles = (
             "& fieldset": {
               borderStyle: "dashed !important",
             },
+          },
+        },
+      },
+      ".root-divider": {
+        width: "100%",
+        backgroundColor: "var(--border) !important",
+      },
+      ".login-modal-root": {
+        "& .MuiTextField-root": {
+          width: "200px !important",
+          "& .MuiOutlinedInput-root": {
+            letterSpacing: "10px",
+            "& .MuiOutlinedInput-input": {
+              textAlign: "center !important",
+            },
+          },
+          "& fieldset": {
+            padding: "0",
+            width: "200px !important",
           },
         },
       },

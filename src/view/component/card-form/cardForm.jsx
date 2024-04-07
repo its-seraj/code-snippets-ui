@@ -5,26 +5,28 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import { CustomPopper } from "./popper";
+import { CustomPopper } from "../popper";
 import ExtraFields from "./extraFields";
+import config from "../../config.json";
 
 const CardForm = (props) => {
-  const { action } = props;
+  console.log("props inside Cardform", props);
+  const { action, cardDetails, setModalOpen, refresh } = props;
 
-  const [previewImage, setPreviewImage] = useState("");
+  const [previewImage, setPreviewImage] = useState(cardDetails?.images?.image || "");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState(["option1", "option2", "option3"]);
-  const [selectedCategory, setSelectedCategory] = useState();
-  const [displayOrder, setDisplayOrder] = useState();
-  const [selectedLabels, setSelectedLabels] = useState([]);
+  const [title, setTitle] = useState(cardDetails?.title || "");
+  const [description, setDescription] = useState(cardDetails?.description || "");
+  const [selectedLabels, setSelectedLabels] = useState(cardDetails?.labels || []);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [isPopperOpen, setIsPopperOpen] = useState(false);
   const [popperPlacement, setPopperPlacement] = useState();
 
-  const [extraFields, setExtraFields] = useState({});
+  const [extraFields, setExtraFields] = useState(cardDetails?.extraFields || {});
+
+  const labels = config.labels.sort((a, b) => a > b);
 
   useEffect(() => {
     console.log(extraFields);
@@ -102,12 +104,13 @@ const CardForm = (props) => {
 
     const requestBody = {
       title,
-      category: selectedCategory,
-      displayOrder,
+      description: description,
       labels: selectedLabels,
       image: previewImage,
+      extraFields,
+      cardUuid: cardDetails?.cardUuid,
     };
-    const url = "http://127.0.0.1:3000/card";
+    const url = `${window._env_.CODE_SNIPPETS_BACKEND}/card`;
     const options = {
       method: "POST",
       credentials: "include",
@@ -124,6 +127,8 @@ const CardForm = (props) => {
       .then((data) => {
         console.log("datat", data);
         if (data.success === true) {
+          refresh(true);
+          setModalOpen(false);
         } else {
           setErrorMessage(data?.error || data?.message);
         }
@@ -144,19 +149,20 @@ const CardForm = (props) => {
     <form onSubmit={handleSubmit}>
       <div className="form-root">
         <div className="form-body">
-          <TextField id="title" label="" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Enter titles" />
           <div className="form-section2">
-            <Autocomplete
+            <TextField id="title" label="" value={title} onChange={(event) => setTitle(event.target.value)} placeholder="Enter titles" />
+            {/* <Autocomplete
               popupIcon={<ExpandMoreRoundedIcon />}
               disablePortal
               id="combo-box-demo"
               options={category}
               sx={{ width: 300 }}
-              value={selectedCategory}
-              onChange={(event, value) => setSelectedCategory(value)}
+              value={description}
+              onChange={(event, value) => setDescription(value)}
               renderInput={(params) => <TextField {...params} label="" placeholder="Select category" />}
-            />
-            <TextField id="display-order" label="" type="number" value={displayOrder} onChange={(event) => setDisplayOrder(event.target.value)} placeholder="Enter display order" />
+            /> */}
+            <TextField id="description" label="" value={description} onChange={(event) => setDescription(event.target.value)} placeholder="Enter description" />
+            {/* <TextField id="display-order" label="" type="number" value={displayOrder} onChange={(event) => setDisplayOrder(event.target.value)} placeholder="Enter display order" /> */}
           </div>
           <Autocomplete
             multiple
@@ -189,7 +195,7 @@ const CardForm = (props) => {
             clearOnBlur
             handleHomeEndKeys
             id="free-solo-with-text-demo"
-            options={category}
+            options={labels}
             getOptionLabel={(option) => {
               if (typeof option === "string") {
                 return option;
@@ -204,7 +210,7 @@ const CardForm = (props) => {
             freeSolo
             renderInput={(params) => <TextField {...params} label="" placeholder="Select labels" />}
           />
-          <div style={{ display: "flex", marginTop: "3em", gap: "20px" }}>
+          <div style={{ display: "flex", margin: "3em auto", gap: "20px" }}>
             <div onDragOver={handleDragOver} onDrop={handleDrop} className="drop-zone">
               <CloudUploadOutlinedIcon style={{ height: "80px", width: "128px" }} />
               <span>Drag & Drop</span>

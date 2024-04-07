@@ -78,93 +78,7 @@ const Card = (props) => {
           <RunCodeIcon />
         </div> */}
         <div className="card-body-root">
-          {cardUx === 0 && (
-            <>
-              <div className="card-image-root">
-                <img src="./assets/img2.png" alt="" />
-              </div>
-              <div className="card-body-content">
-                <div className="header">Fugiat ad magna adipisicing tempor aliquip consequat nulla tempor adipisicing.</div>
-                <div className="labels">
-                  {labels?.length > 0 &&
-                    labels.map((chip) => {
-                      const bg = chipColorConfig?.[chip] ? chipColorConfig?.[chip].bg + " !important" : "";
-                      const color = chipColorConfig?.[chip] ? chipColorConfig?.[chip].color + " !important" : "";
-                      return (
-                        <>
-                          <Chip label={chip} sx={{ backgroundColor: bg ?? "", color: color ?? "" }} onClick={handleClick} />
-                        </>
-                      );
-                    })}
-                </div>
-              </div>
-            </>
-          )}
-          {cardUx === 1 && (
-            <>
-              <div className="card-body-content">
-                <div className="header" style={{ width: "calc(100% - 50px)" }}>
-                  Fugiat ad magna adipisicing
-                </div>
-                <div className="sub-header">Laboris labore do voluptate anim irure consequat incididunt eu magna duis Lorem.</div>
-                <div className="labels">
-                  {labels?.length > 0 &&
-                    labels.map((chip) => {
-                      const bg = chipColorConfig?.[chip] ? chipColorConfig?.[chip].bg + " !important" : "";
-                      const color = chipColorConfig?.[chip] ? chipColorConfig?.[chip].color + " !important" : "";
-                      return (
-                        <>
-                          <Chip label={chip} sx={{ backgroundColor: bg ?? "", color: color ?? "" }} onClick={handleClick} />
-                        </>
-                      );
-                    })}
-                </div>
-                <div className="run-code-icon" onClick={() => openModelHandler("editor")}>
-                  <RunCodeIcon />
-                </div>
-              </div>
-            </>
-          )}
-          {cardUx === 2 && (
-            <>
-              <div className="card-body-content">
-                <div className="header" style={{ width: "calc(100% - 50px)" }}>
-                  Fugiat ad magna adipisicing
-                </div>
-                {cardDetails?.header && <div className="sub-header">Laboris labore do voluptate anim irure consequat incididunt eu magna duis Lorem.</div>}
-
-                <div className="ace_editor-root">
-                  <Editor
-                    mode="javascript"
-                    dark={theme === "dark"}
-                    // onChange={(e) => {
-                    //    updatejsValue(e);
-                    // }}
-                    editable={false}
-                    value={`const a = 'String'\nfunction yell`}
-                    maxLines={10}
-                  />
-                </div>
-
-                <div className="labels">
-                  {labels?.length > 0 &&
-                    labels.map((chip) => {
-                      const bg = chipColorConfig?.[chip] ? chipColorConfig?.[chip].bg + " !important" : "";
-                      const color = chipColorConfig?.[chip] ? chipColorConfig?.[chip].color + " !important" : "";
-                      return (
-                        <>
-                          <Chip label={chip} sx={{ backgroundColor: bg ?? "", color: color ?? "" }} onClick={handleClick} />
-                        </>
-                      );
-                    })}
-                </div>
-                <div className="run-code-icon" onClick={() => openModelHandler("editor")}>
-                  <RunCodeIcon />
-                </div>
-              </div>
-            </>
-          )}
-          {cardUx === 3 && (
+          {cardDetails && (
             <>
               <div className="card-body-content">
                 {cardDetails?.title && (
@@ -210,7 +124,7 @@ const Card = (props) => {
                       })}
                   </div>
                 )}
-                {cardDetails?.extraFields?.CodeSandbox?.length > 0 && (
+                {(cardDetails?.extraFields?.CodeSandbox?.length > 0 || cardDetails?.extraFields?.CodePen?.length > 0) && (
                   <div className="run-code-icon" onClick={() => openModelHandler("editor")}>
                     <RunCodeIcon />
                   </div>

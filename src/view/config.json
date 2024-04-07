@@ -1,4 +1,4 @@
 {
-  "add-more": ["Editor", "CodeSandbox", "URL's"],
+  "add-more": ["Editor", "CodeSandbox", "CodePen", "URL's"],
   "labels": ["javascript", "react", "node.js", "mui", "vite", "css", "cmd", "linux", "python", "java", "mogodb", "mongoose", "sequalize", "sql"]
 }

@@ -28,7 +28,7 @@ export const CustomPopper = (props) => {
               <div className="add-more-root">
                 {config["add-more"].map((btn) => (
                   <div className="btn" onClick={() => clickHandler(btn)} key={btn}>
-                    {btn === "Editor" ? <CodeRoundedIcon /> : <>{btn === "CodeSandbox" ? <CodeSandboxIcon /> : <InsertLinkRoundedIcon />}</>}
+                    {btn === "Editor" ? <CodeRoundedIcon /> : <>{btn === "CodeSandbox" || btn === "CodePen" ? <CodeSandboxIcon /> : <InsertLinkRoundedIcon />}</>}
                     <span>{btn}</span>
                   </div>
                 ))}

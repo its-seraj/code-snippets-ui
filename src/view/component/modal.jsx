@@ -28,14 +28,23 @@ const BasicModal = (props) => {
 
   const { theme } = useTheme();
 
+  let embed_url = "";
+  if (cardDetails?.extraFields?.CodeSandbox) {
+    embed_url = `${cardDetails?.extraFields?.CodeSandbox?.[0]?.value}&hidenavigation=1&theme=${theme}&fontsize=10`;
+  } else if (cardDetails?.extraFields?.CodePen) {
+    let url = cardDetails?.extraFields?.CodePen?.[0]?.value;
+    url = url.replace("/pen", "/embed");
+    embed_url = `${url}?`;
+  }
+
   return (
     <div>
       <Modal open={modalOpen} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
           <div className="modal-box-root">
-            {modalAction === "editor" ? (
+            {(modalAction === "editor" && embed_url) ? (
               <iframe
-                src={`${cardDetails?.extraFields?.CodeSandbox?.[0]?.value}&hidenavigation=1&theme=${theme}&fontsize=10`}
+                src={embed_url}
                 title="Framer Motion: useSpring example (forked)"
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               ></iframe>

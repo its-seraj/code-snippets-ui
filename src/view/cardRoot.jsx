@@ -41,7 +41,7 @@ const CardRoot = (props) => {
 
   return (
     <>
-      <div className="card-root-container">{cards?.length > 0 && cards.map((currCard, index) => <Card key={index} cardUx={currCard?.cardUx || 3} cardDetails={currCard} refresh={fetchCards} />)}</div>
+      <div className="card-root-container">{cards?.length > 0 && cards.map((currCard, index) => <Card key={index} cardDetails={currCard} refresh={fetchCards} />)}</div>
       {modalOpenRoot && <BasicModal modalOpen={modalOpenRoot} setModalOpen={setModalOpenRoot} modalAction="new-card" refresh={fetchCards} />}
     </>
   );

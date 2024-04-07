@@ -80,6 +80,31 @@ const ExtraFields = (props) => {
       ) : (
         <></>
       )}
+      {Object.keys(extraFields).length && extraFields["CodePen"] ? (
+        extraFields["CodePen"].map((currEditor, index) => (
+          <>
+            <TextField
+              className="editor"
+              label=""
+              value={currEditor?.value}
+              onChange={(event) => onChangeHandler("CodePen", event.target.value, index)}
+              placeholder="Embed URL e.g. https://codepen.io/xxxxx/embed/xxxxx"
+              autoComplete="off"
+              InputProps={{
+                startAdornment: (
+                  <>
+                    <InputAdornment position="start">
+                      <CodeSandboxIcon />
+                    </InputAdornment>
+                  </>
+                ),
+              }}
+            />
+          </>
+        ))
+      ) : (
+        <></>
+      )}
       {Object.keys(extraFields).length && extraFields["URL's"] ? (
         extraFields["URL's"].map((currEditor, index) => (
           <>

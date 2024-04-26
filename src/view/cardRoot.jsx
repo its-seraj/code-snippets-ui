@@ -3,7 +3,7 @@ import Card from "./component/card";
 import BasicModal from "./component/modal";
 
 const CardRoot = (props) => {
-  const { modalOpenRoot, setModalOpenRoot } = props;
+  const { modalOpenRoot, setModalOpenRoot, search, setSearch } = props;
 
   const [cards, setCards] = useState([]);
 
@@ -12,7 +12,7 @@ const CardRoot = (props) => {
       return;
     }
 
-    const url = `${window._env_.CODE_SNIPPETS_BACKEND}/card`;
+    let url = `${window._env_.CODE_SNIPPETS_BACKEND}/card`;
     const options = {
       method: "GET",
       credentials: "include",
@@ -20,6 +20,10 @@ const CardRoot = (props) => {
         "Content-Type": "application/json",
       },
     };
+
+    if (search.trim()) {
+      url += `?search=${search.trim()}`;
+    }
 
     await fetch(url, options)
       .then((response) => {
@@ -38,6 +42,9 @@ const CardRoot = (props) => {
   useEffect(() => {
     fetchCards();
   }, []);
+  useEffect(() => {
+    fetchCards(true);
+  }, [search]);
 
   return (
     <>

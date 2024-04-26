@@ -12,6 +12,7 @@ import { useState } from "react";
 function App() {
   const { theme, toggleTheme } = useTheme();
   const [modalOpenRoot, setModalOpenRoot] = useState(false);
+  const [search, setSearch] = useState("");
 
   const newCardHandler = () => {
     setModalOpenRoot(true);
@@ -32,7 +33,7 @@ function App() {
         )}
       </div>
       <PowerMenu />
-      <Menu />
+      <Menu search={search} setSearch={setSearch} />
       <div className="action-menu">
         <Divider className="root-divider" />
         <div className="action">
@@ -47,7 +48,7 @@ function App() {
           </div>
         </div>
       </div>
-      <CardRoot modalOpenRoot={modalOpenRoot} setModalOpenRoot={setModalOpenRoot} />
+      <CardRoot modalOpenRoot={modalOpenRoot} setModalOpenRoot={setModalOpenRoot} search={search} setSearch={setSearch} />
     </>
   );
 }

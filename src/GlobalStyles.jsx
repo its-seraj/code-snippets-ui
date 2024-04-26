@@ -4,19 +4,22 @@ export const GlobalStyles = (
   <GB
     styles={{
       ".menu": {
-        backgroundColor: "var(--background) !important",
-        backgroundImage: "var(--input-bg-image)",
         width: "40vw !important",
         marginTop: "2rem",
-        borderRadius: "8px !important",
+        "& .MuiInputAdornment-root": {},
         ".MuiInputBase-root": {
           width: "100% !important",
           overflow: "hidden !important",
+          alignItems: "center !important",
+          borderRadius: "8px !important",
           "& input": {
             width: "100%",
             "& :hover, :focus, :active": {
               width: "100%",
             },
+          },
+          "& svg": {
+            color: "var(--title-color)",
           },
         },
       },

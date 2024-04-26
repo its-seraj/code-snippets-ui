@@ -13,6 +13,7 @@ const Menu = (props) => {
           variant="outlined"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          autoComplete="off"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

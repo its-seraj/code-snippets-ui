@@ -77,7 +77,7 @@ export const PasscodeInput = (props) => {
               // fullWidth
               InputProps={{
                 inputProps: {
-                  maxLength: 7,
+                  maxLength: 11,
                 },
               }}
             />

@@ -198,7 +198,7 @@ export const GlobalStyles = (
       },
       ".login-modal-root": {
         "& .MuiTextField-root": {
-          width: "200px !important",
+          width: "260px !important",
           "& .MuiOutlinedInput-root": {
             letterSpacing: "10px",
             "& .MuiOutlinedInput-input": {
@@ -207,7 +207,7 @@ export const GlobalStyles = (
           },
           "& fieldset": {
             padding: "0",
-            width: "200px !important",
+            width: "260px !important",
           },
         },
       },

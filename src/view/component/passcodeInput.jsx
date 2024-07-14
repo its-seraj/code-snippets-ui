@@ -1,4 +1,3 @@
-import CryptoJS from "crypto-js";
 import { TextField, Modal } from "@mui/material";
 import { useState } from "react";
 
@@ -10,11 +9,11 @@ export const PasscodeInput = (props) => {
     const value = event.target.value;
     // Remove any non-numeric characters
     const newValue = value.replace(/\D/g, "");
-    if (newValue.length === 4) {
-      loginSubmit(CryptoJS.MD5(newValue).toString());
+    if (newValue.length === 6) {
+      loginSubmit(newValue);
     }
     // Format the input with dash separators
-    const formatted = newValue.replace(/(\d{1})/g, "$1-").slice(0, 7);
+    const formatted = newValue.replace(/(\d{1})/g, "$1-").slice(0, 11);
     setFormattedValue(formatted);
   };
 

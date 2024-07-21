@@ -1,8 +1,7 @@
 import { createContext, useContext, useState, useLayoutEffect } from "react";
 const ThemeContext = createContext();
 const ThemeProvider = ({ children }) => {
-  const initialTheme = () => localStorage.getItem("SYSTEM_THEME");
-  const [theme, setTheme] = useState(initialTheme);
+  const [theme, setTheme] = useState("dark");
   const toggleTheme = () => setTheme((theme) => (theme === "light" ? "dark" : "light"));
   useLayoutEffect(() => {
     localStorage.setItem("SYSTEM_THEME", theme);

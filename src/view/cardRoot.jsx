@@ -7,11 +7,13 @@ const CardRoot = (props) => {
   const { modalOpenRoot, setModalOpenRoot, search, setSearch } = props;
 
   const [cards, setCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchCards = async (isRefresh = false) => {
     if (cards?.length > 0 && !isRefresh) {
       return;
     }
+    setIsLoading(true);
 
     let url = `${window._env_.CODE_SNIPPETS_BACKEND}/card`;
     const options = {
@@ -34,9 +36,11 @@ const CardRoot = (props) => {
         if (data.success === true) {
           setCards(data.data);
         }
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error occured while fetching cards", error);
+        setIsLoading(false);
       });
   };
 
@@ -49,7 +53,7 @@ const CardRoot = (props) => {
 
   return (
     <>
-      <div className="card-root-container">{cards?.length > 0 ? cards.map((currCard, index) => <Card key={index} cardDetails={currCard} refresh={fetchCards} />) : <CardSkeleton />}</div>
+      <div className="card-root-container">{cards?.length > 0 ? cards.map((currCard, index) => <Card key={index} cardDetails={currCard} refresh={fetchCards} />) : isLoading && <CardSkeleton />}</div>
       {modalOpenRoot && <BasicModal modalOpen={modalOpenRoot} setModalOpen={setModalOpenRoot} modalAction="new-card" refresh={fetchCards} />}
     </>
   );

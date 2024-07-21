@@ -6,6 +6,7 @@ import { CardSkeleton } from "./component/cardSkeleton";
 const CardRoot = (props) => {
   const { modalOpenRoot, setModalOpenRoot, search, setSearch } = props;
 
+  const [counts, setCounts] = useState();
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -35,6 +36,9 @@ const CardRoot = (props) => {
       .then((data) => {
         if (data.success === true) {
           setCards(data.data);
+          if(!counts) {
+            setCounts(data.count);
+          }
         }
         setIsLoading(false);
       })
@@ -53,6 +57,7 @@ const CardRoot = (props) => {
 
   return (
     <>
+      <div className="total-count">{counts}</div>
       <div className="card-root-container">{cards?.length > 0 ? cards.map((currCard, index) => <Card key={index} cardDetails={currCard} refresh={fetchCards} />) : isLoading && <CardSkeleton />}</div>
       {modalOpenRoot && <BasicModal modalOpen={modalOpenRoot} setModalOpen={setModalOpenRoot} modalAction="new-card" refresh={fetchCards} />}
     </>

@@ -223,6 +223,15 @@ body {
   height: 14px;
 }
 
+.total-count {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  font-size: 0.8em;
+  letter-spacing: 2px;
+  opacity: 0.5;
+}
+
 /* code-editor */
 .run-code-icon {
   cursor: pointer;
@@ -326,16 +335,18 @@ hr {
 }
 
 @media (max-width: 820px) {
-  .drop-zone{
+  .drop-zone {
     width: 30vw;
     font-size: clamp(12px, 2vw, 1em);
   }
-  .form-body .MuiBox-root{
+
+  .form-body .MuiBox-root {
     width: 30vw;
     font-size: clamp(12px, 2vw, 1em);
     overflow: hidden;
   }
-  .preview-skeleton{
+
+  .preview-skeleton {
     width: 100%;
   }
 }

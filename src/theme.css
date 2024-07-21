@@ -8,7 +8,7 @@
 }
 
 .light-mode {
-  --background: #FFFFFF;
+  --background: #eeeeeea0;
   --border: #b4b4b444;
   --title-color: rgb(9, 9, 11, 0.8);
   --label-background: rgb(244, 244, 245);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "./component/card";
 import BasicModal from "./component/modal";
+import { CardSkeleton } from "./component/cardSkeleton";
 
 const CardRoot = (props) => {
   const { modalOpenRoot, setModalOpenRoot, search, setSearch } = props;
@@ -48,7 +49,7 @@ const CardRoot = (props) => {
 
   return (
     <>
-      <div className="card-root-container">{cards?.length > 0 && cards.map((currCard, index) => <Card key={index} cardDetails={currCard} refresh={fetchCards} />)}</div>
+      <div className="card-root-container">{cards?.length > 0 ? cards.map((currCard, index) => <Card key={index} cardDetails={currCard} refresh={fetchCards} />) : <CardSkeleton />}</div>
       {modalOpenRoot && <BasicModal modalOpen={modalOpenRoot} setModalOpen={setModalOpenRoot} modalAction="new-card" refresh={fetchCards} />}
     </>
   );

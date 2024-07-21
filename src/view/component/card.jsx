@@ -110,6 +110,20 @@ const Card = (props) => {
                   </div>
                 )}
 
+                {cardDetails?.extraFields?.["URL's"]?.length > 0 && (
+                  <div className="links-root">
+                    {cardDetails.extraFields["URL's"].map((link, index) => {
+                      return (
+                        <>
+                          <a href={link.value} target="_blank" rel="noopener noreferrer">
+                            <img src={"https://www.google.com/s2/favicons?domain_url=" + link.value} />
+                          </a>
+                        </>
+                      );
+                    })}
+                  </div>
+                )}
+
                 {cardDetails?.labels && (
                   <div className="labels">
                     {cardDetails.labels?.length > 0 &&

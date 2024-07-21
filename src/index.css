@@ -214,6 +214,15 @@ body {
   gap: 10px;
 }
 
+.card-body-content .links-root {
+  display: flex;
+  gap: 10px;
+}
+
+.card-body-content .links-root img {
+  height: 14px;
+}
+
 /* code-editor */
 .run-code-icon {
   cursor: pointer;

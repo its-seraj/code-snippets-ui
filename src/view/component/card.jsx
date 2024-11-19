@@ -10,7 +10,6 @@ import { Editor } from "./AceEditor.jsx";
 import { useTheme } from "../../ThemeProvider.jsx";
 
 const Card = (props) => {
-  console.log("props inside card", props);
   const { cardDetails, cardUx, refresh } = props;
   const [moreOpen, setMoreOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);

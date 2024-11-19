@@ -8,8 +8,10 @@ const CardRoot = (props) => {
 
   const [counts, setCounts] = useState();
   const [cards, setCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const controller = new AbortController();
+  const signal = controller.signal;
   const fetchCards = async (isRefresh = false) => {
     if (cards?.length > 0 && !isRefresh) {
       return;
@@ -23,6 +25,7 @@ const CardRoot = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
+      signal,
     };
 
     if (search.trim()) {
@@ -35,14 +38,19 @@ const CardRoot = (props) => {
       })
       .then((data) => {
         if (data.success === true) {
+          controller.abort();
+          console.log("All cards data", data.data);
           setCards(data.data);
-          if(!counts) {
+          if (!counts) {
             setCounts(data.count);
           }
         }
         setIsLoading(false);
       })
       .catch((error) => {
+        if (error.name === "AbortError") {
+          return console.log("Request was canceled");
+        }
         console.error("Error occured while fetching cards", error);
         setIsLoading(false);
       });
@@ -52,13 +60,17 @@ const CardRoot = (props) => {
     fetchCards();
   }, []);
   useEffect(() => {
-    fetchCards(true);
+    if (search) {
+      fetchCards(true);
+    }
   }, [search]);
 
   return (
     <>
       <div className="total-count">{counts}</div>
-      <div className="card-root-container">{cards?.length > 0 ? cards.map((currCard, index) => <Card key={index} cardDetails={currCard} refresh={fetchCards} />) : isLoading && <CardSkeleton />}</div>
+      <div className="card-root-container">
+        {cards?.length > 0 ? cards.map((currCard) => <Card key={currCard?.cardUuid} cardDetails={currCard} refresh={fetchCards} />) : isLoading && <CardSkeleton />}
+      </div>
       {modalOpenRoot && <BasicModal modalOpen={modalOpenRoot} setModalOpen={setModalOpenRoot} modalAction="new-card" refresh={fetchCards} />}
     </>
   );

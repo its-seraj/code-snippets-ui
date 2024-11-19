@@ -6,13 +6,14 @@ import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import SettingsApplicationsRoundedIcon from "@mui/icons-material/SettingsApplicationsRounded";
 import { PasscodeInput } from "passcode-input";
+import { verifyLogin } from "../helper/token";
+import { useEffect } from "react";
 
 export default function PowerMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
   const [isLoginPassOpen, setIsLoginPassOpen] = React.useState(false);
-
-  const resource = localStorage.getItem("resource");
+  const [resource, setResource] = React.useState();
 
   const handleClick = (event) => {
     setOpen((prev) => !prev);
@@ -24,6 +25,7 @@ export default function PowerMenu() {
       setOpen((prev) => !prev);
     } else if (action === "logout") {
       localStorage.removeItem("resource");
+      setResource(undefined);
       /* deleting cookie */
       logoutSubmit();
       setOpen(false);
@@ -55,6 +57,12 @@ export default function PowerMenu() {
         console.error("Error occured while logout", error);
       });
   };
+
+  useEffect(() => {
+    const isLogedin = verifyLogin(setResource);
+    console.log("isLogedin", isLogedin);
+    setResource(isLogedin);
+  }, [open]);
 
   return (
     <div className="admin-menu-root">

@@ -2,11 +2,13 @@ import { useState } from "react";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
+import { ExpandIcon } from "../../assets/expand.jsx";
 import BasicModal from "./modal";
 import { Chip } from "@mui/material";
 import chipColorConfig from "./../chip.color.json";
 import { RunCodeIcon } from "../../assets/terminal.jsx";
 import { Editor } from "./AceEditor.jsx";
+import EditorModal from "./editorModal.jsx";
 import { useTheme } from "../../ThemeProvider.jsx";
 
 const Card = (props) => {
@@ -14,6 +16,7 @@ const Card = (props) => {
   const [moreOpen, setMoreOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState("");
+  const [expandedModal, setExpandedModal] = useState(false);
 
   const { theme } = useTheme();
 
@@ -96,6 +99,12 @@ const Card = (props) => {
 
                 {cardDetails?.extraFields?.Editor?.length > 0 && (
                   <div className="ace_editor-root">
+                    <div className="editor-expand" onClick={() => setExpandedModal(true)}>
+                      <ExpandIcon />
+                    </div>
+                    {expandedModal && (
+                      <EditorModal modalOpen={expandedModal} setModalOpen={setExpandedModal} language={cardDetails.extraFields.Editor[0]?.language} codes={cardDetails.extraFields.Editor[0]?.value} />
+                    )}
                     <Editor
                       mode={cardDetails.extraFields.Editor[0]?.language}
                       dark={theme === "dark"}

@@ -27,7 +27,7 @@ body {
   width: 3px;
   display: block;
 }
-.form-body::-webkit-scrollbar-track { background: transparent; }
+.form-body::-webkit-scrollbar-track { background: black; }
 .form-body::-webkit-scrollbar-thumb {
   background-color: var(--border-strong);
   border-radius: 99px;
@@ -488,6 +488,15 @@ body {
   width: 100%;
   border-radius: 16px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-box-root > form {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-box-root iframe {

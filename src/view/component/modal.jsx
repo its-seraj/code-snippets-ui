@@ -47,7 +47,7 @@ const BasicModal = (props) => {
             {(modalAction === "editor" && embed_url) ? (
               <iframe
                 src={embed_url}
-                title="Framer Motion: useSpring example (forked)"
+                title="Embedded code preview"
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               ></iframe>
             ) : (

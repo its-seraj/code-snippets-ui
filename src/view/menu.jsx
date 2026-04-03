@@ -8,7 +8,7 @@ const Menu = ({ search, setSearch }) => {
       <input
         className="search-input"
         type="text"
-        placeholder="Search snippets..."
+        placeholder="Search by title, label, or keyword..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         autoComplete="off"

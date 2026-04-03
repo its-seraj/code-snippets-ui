@@ -59,7 +59,7 @@ const ExtraFields = (props) => {
               label=""
               value={currEditor?.value}
               onChange={(event) => onChangeHandler("CodeSandbox", event.target.value, index)}
-              placeholder="Embed URL e.g. https://codesandbox.io/embed/"
+              placeholder="CodeSandbox embed URL"
               autoComplete="off"
               InputProps={{
                 startAdornment: (
@@ -84,7 +84,7 @@ const ExtraFields = (props) => {
               label=""
               value={currEditor?.value}
               onChange={(event) => onChangeHandler("CodePen", event.target.value, index)}
-              placeholder="Embed URL e.g. https://codepen.io/xxxxx/embed/xxxxx"
+              placeholder="CodePen embed URL"
               autoComplete="off"
               InputProps={{
                 startAdornment: (
@@ -109,7 +109,7 @@ const ExtraFields = (props) => {
               label=""
               value={currEditor?.value}
               onChange={(event) => onChangeHandler("URL's", event.target.value, index)}
-              placeholder="Enter URL e.g. https://example.io/"
+              placeholder="Reference URL"
               autoComplete="off"
               InputProps={{
                 startAdornment: (

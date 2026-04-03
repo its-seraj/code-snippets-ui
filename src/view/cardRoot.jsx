@@ -111,7 +111,7 @@ const CardRoot = (props) => {
       {counts !== undefined && (
         <div className="toolbar">
           <div className="toolbar-left">
-            <span className="total-count">{counts} snippets</span>
+            <span className="total-count">{counts} {counts === 1 ? "snippet" : "snippets"}</span>
           </div>
         </div>
       )}

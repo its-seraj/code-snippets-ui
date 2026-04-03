@@ -27,7 +27,7 @@ const CardForm = (props) => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setErrorMessage("");
-    if (!file.type.match("image/*")) { setErrorMessage("Please select a valid image file."); return; }
+    if (!file.type.match("image/*")) { setErrorMessage("Only image files are supported."); return; }
     const reader = new FileReader();
     reader.onload = (e) => setPreviewImage(e.target.result);
     reader.readAsDataURL(file);
@@ -40,12 +40,12 @@ const CardForm = (props) => {
     const pastedItem = clipboardData.items[0];
     if (pastedItem.type.indexOf("image/") !== -1) {
       const pastedFile = pastedItem.getAsFile();
-      if (!pastedFile.type.match("image/*")) { setErrorMessage("Please paste a valid image."); return; }
+      if (!pastedFile.type.match("image/*")) { setErrorMessage("Only image files can be pasted."); return; }
       const reader = new FileReader();
       reader.onload = (e) => setPreviewImage(e.target.result);
       reader.readAsDataURL(pastedFile);
     } else {
-      setErrorMessage("Please paste an image.");
+      setErrorMessage("Clipboard does not contain an image.");
     }
   };
 
@@ -55,7 +55,7 @@ const CardForm = (props) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
     if (!file) return;
-    if (!file.type.match("image/*")) { setErrorMessage("Please drop a valid image file."); return; }
+    if (!file.type.match("image/*")) { setErrorMessage("Only image files are supported."); return; }
     const reader = new FileReader();
     reader.onload = (e) => setPreviewImage(e.target.result);
     reader.readAsDataURL(file);
@@ -90,15 +90,15 @@ const CardForm = (props) => {
 
         {/* Modal header */}
         <div className="form-header">
-          <span className="form-header-title">{action === "new" ? "New Snippet" : "Edit Snippet"}</span>
+          <span className="form-header-title">{action === "new" ? "New Snippet" : "Edit Snippet" }</span>
         </div>
 
         <div className="form-body">
 
           {/* Title + Description */}
           <div className="form-row">
-            <TextField value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-            <TextField value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
+            <TextField value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Snippet title" />
+            <TextField value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Short description" />
           </div>
 
           {/* Labels */}
@@ -121,17 +121,17 @@ const CardForm = (props) => {
             options={labels}
             getOptionLabel={(o) => (typeof o === "string" ? o : o.inputValue ?? o.title)}
             renderOption={(props, option) => <li {...props}>{option.title ?? option}</li>}
-            renderInput={(params) => <TextField {...params} placeholder="Labels" />}
+            renderInput={(params) => <TextField {...params} placeholder="Add labels" />}
           />
 
           {/* Image upload */}
           <div className="form-image-row">
             <div onDragOver={handleDragOver} onDrop={handleDrop} className="drop-zone">
               <CloudUploadOutlinedIcon style={{ height: 48, width: 48, opacity: 0.35 }} />
-              <span>Drag & Drop</span>
+              <span>Drag & drop here</span>
               <input type="file" id="image-upload" onChange={handleFileChange} />
-              <label htmlFor="image-upload">Upload Image</label>
-              <div className="paste-container" onPaste={handlePaste}>(Ctrl+V)</div>
+              <label htmlFor="image-upload">Browse file</label>
+              <div className="paste-container" onPaste={handlePaste}>or paste (Ctrl+V)</div>
             </div>
 
             <div className="form-image-preview">
@@ -142,7 +142,7 @@ const CardForm = (props) => {
                   <Skeleton variant="rectangular" />
                   <div className="preview-placeholder">
                     <ImageOutlinedIcon style={{ height: 40, width: 40 }} />
-                    <span>Preview</span>
+                    <span>Image preview</span>
                   </div>
                 </div>
               )}
@@ -159,12 +159,12 @@ const CardForm = (props) => {
           <div className="text-btn-root" onClick={popperClickHandler("top-start")}>
             {isPopperOpen && <CustomPopper anchorEl={anchorEl} isPopperOpen={isPopperOpen} popperPlacement={popperPlacement} setExtraFields={setExtraFields} />}
             <AddRoundedIcon />
-            <button className="text-btn" type="button">Add More</button>
+            <button className="text-btn" type="button">Add field</button>
           </div>
           <div className="form-footer-right">
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             <button type="submit" className="save-card-btn">
-              {action === "new" ? "Create Snippet" : "Update Snippet"}
+              {action === "new" ? "Save snippet" : "Save changes"}
             </button>
           </div>
         </div>

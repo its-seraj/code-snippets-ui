@@ -29,11 +29,11 @@ export default function PowerMenu() {
           setIsLoginOpen(false);
           setResource(true);
         } else {
-          setLoginError("Invalid passkey. Try again.");
+          setLoginError("Incorrect passkey. Please try again.");
           setPasskey("");
         }
       })
-      .catch(() => setLoginError("Connection error."));
+      .catch(() => setLoginError("Unable to connect. Please check your network."));
   };
 
   const logoutSubmit = () => {
@@ -60,13 +60,13 @@ export default function PowerMenu() {
   return (
     <>
       {resource ? (
-        <button className="btn-logout" onClick={logoutSubmit} title="Logout">
+        <button className="btn-logout" onClick={logoutSubmit} title="Sign out">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
             <polyline points="16 17 21 12 16 7"/>
             <line x1="21" y1="12" x2="9" y2="12"/>
           </svg>
-          Logout
+          Sign out
         </button>
       ) : (
         <button className="btn-login" onClick={() => setIsLoginOpen(true)}>
@@ -75,7 +75,7 @@ export default function PowerMenu() {
             <polyline points="10 17 15 12 10 7"/>
             <line x1="15" y1="12" x2="3" y2="12"/>
           </svg>
-          Login
+          Sign in
         </button>
       )}
 
@@ -91,8 +91,8 @@ export default function PowerMenu() {
                 </svg>
               </div>
               <div>
-                <h2 className="login-card-title">Enter Passkey</h2>
-                <p className="login-card-subtitle">6-digit access code</p>
+                <h2 className="login-card-title">Authenticate</h2>
+                <p className="login-card-subtitle">Enter your 6-digit access code</p>
               </div>
               <button className="login-close-btn" onClick={() => { setIsLoginOpen(false); setPasskey(""); setLoginError(""); }}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -122,7 +122,7 @@ export default function PowerMenu() {
 
               {loginError && <p className="login-error">{loginError}</p>}
 
-              <p className="login-hint">Type your 6-digit passkey</p>
+              <p className="login-hint">Use your keyboard to enter the code</p>
             </div>
           </div>
         </div>

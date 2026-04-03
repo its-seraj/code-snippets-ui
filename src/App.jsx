@@ -29,7 +29,7 @@ function App() {
           <button
             className="icon-btn"
             onClick={toggleTheme}
-            title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
           >
             {theme === "dark" ? (
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -54,7 +54,7 @@ function App() {
 
           <button className="btn-primary" onClick={() => setModalOpenRoot(true)}>
             <AddIcon style={{ width: 16, height: 16 }} />
-            New Snippet
+            Add Snippet
           </button>
         </div>
       </nav>

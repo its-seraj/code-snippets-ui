@@ -34,22 +34,18 @@ const ExtraFields = (props) => {
   return (
     <>
       {Object.keys(extraFields).length && extraFields["Editor"] ? (
-        <div className="form-ace-editor">
+        <div className="form-ace-editor-masonry">
           {extraFields["Editor"].map((currEditor, index) => (
-            <>
-              <div>
-                <Editor
-                  mode="javascript"
-                  dark={theme === "dark"}
-                  onChange={(e) => {
-                    onChangeHandler("Editor", e, index);
-                  }}
-                  editable={true}
-                  value={currEditor?.value}
-                  maxLines={10}
-                />
-              </div>
-            </>
+            <div key={index} className="form-ace-editor-item">
+              <Editor
+                mode="javascript"
+                dark={theme === "dark"}
+                onChange={(e) => onChangeHandler("Editor", e, index)}
+                editable={true}
+                value={currEditor?.value}
+                maxLines={12}
+              />
+            </div>
           ))}
         </div>
       ) : (

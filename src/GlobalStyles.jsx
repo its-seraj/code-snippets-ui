@@ -3,97 +3,23 @@ import { GlobalStyles as GB } from "@mui/material";
 export const GlobalStyles = (
   <GB
     styles={{
-      ".menu": {
-        width: "40vw !important",
-        marginTop: "2rem",
-        "& .MuiInputAdornment-root": {},
-        ".MuiInputBase-root": {
-          width: "100% !important",
-          overflow: "hidden !important",
-          alignItems: "center !important",
-          borderRadius: "8px !important",
-          "& input": {
-            width: "100%",
-            "& :hover, :focus, :active": {
-              width: "100%",
-            },
-          },
-          "& svg": {
-            color: "var(--title-color)",
-          },
-        },
-      },
-      ".admin-menu-root": {
-        position: "absolute",
-        left: "0",
-        top: "5vh",
-        zIndex: "1301",
-        "& .MuiIconButton-root": {
-          marginLeft: "-4px",
-          padding: "4px",
-          borderRadius: "0 8px 8px 0",
-          border: "1px solid var(--border)",
-          borderLeft: "none",
-          backgroundColor: "var(--background)",
-          "&:hover, &:focus": {
-            // borderBottom: "none !important",
-            backgroundColor: "var(--background)",
-          },
-        },
-        "& .MuiIconButton-root[aria-expanded=true]": {
-          borderBottomRightRadius: "0",
-          borderBottom: "none",
-        },
-        "& svg": {
-          color: "var(--title-color)",
-          opacity: "0.5",
-        },
-      },
-      ".admin-menu": {
-        "& .MuiMenu-paper": {
-          left: "0 !important",
-          marginTop: "-1.5px",
-          color: "var(--title-color)",
-          border: "1px solid var(--border)",
-          borderLeft: "none",
-          borderRadius: "0 8px 8px 0",
-          backgroundColor: "var(--background) !important",
-          "& .MuiMenu-list": {
-            display: "grid",
-            // gap: "10px",
-            padding: "4px",
-          },
-          "& .MuiMenuItem-root": {
-            padding: "10px",
-            fontSize: "14px",
-            fontWeight: "600",
-            fontFamily: "'Fira Code', monospace",
-            borderRadius: "8px",
-            gap: "1em",
-            opacity: "0.5",
-            "& svg": {
-              height: "0.9em",
-              width: "0.9em",
-            },
-            "&:hover": {
-              opacity: "0.8",
-            },
-          },
-        },
-      },
+      /* ── MUI Chip ─────────────────────────────────────────────────────────── */
       ".MuiChip-root": {
         color: "var(--label-color) !important",
         backgroundColor: "var(--label-background) !important",
-        height: "24px !important",
-        fontWeight: "500",
+        height: "22px !important",
+        fontSize: "11.5px !important",
+        fontWeight: "500 !important",
+        fontFamily: "'Inter', sans-serif !important",
+        borderRadius: "6px !important",
         "& .MuiChip-label": {
-          paddingBottom: "2px",
+          paddingBottom: "1px",
+          paddingLeft: "8px",
+          paddingRight: "8px",
         },
       },
-      ".MuiBox-root": {
-        width: "260px",
-        position: "relative",
-      },
+
+      /* ── MUI TextField ────────────────────────────────────────────────────── */
       ".MuiTextField-root": {
         width: "100% !important",
         "& .MuiOutlinedInput-root": {
@@ -101,16 +27,19 @@ export const GlobalStyles = (
           alignItems: "flex-start",
           gap: "5px",
           height: "40px",
-          padding: "9px",
-          fontSize: "14px !important",
-          letterSpacing: "1px",
-          fontFamily: "'Fira Code', monospace",
+          padding: "9px 12px",
+          fontSize: "13.5px !important",
+          letterSpacing: "0.1px",
+          fontFamily: "'Inter', sans-serif !important",
           color: "var(--title-color)",
-          backgroundColor: "var(--background) !important",
-          "&:hover, &:active, &:focus": {
-            "& fieldset": {
-              border: "1px solid var(--border) !important",
-            },
+          backgroundColor: "var(--background-secondary) !important",
+          borderRadius: "9px !important",
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "var(--border-strong) !important",
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "var(--accent) !important",
+            borderWidth: "1px !important",
           },
           "& .MuiOutlinedInput-input": {
             padding: "0 !important",
@@ -118,84 +47,102 @@ export const GlobalStyles = (
           "& .MuiChip-root": {
             height: "20px !important",
             margin: "0 !important",
+            fontSize: "11px !important",
+            borderRadius: "5px !important",
             color: "var(--label-color) !important",
             backgroundColor: "var(--label-background) !important",
             "& .MuiChip-label": {
               paddingBottom: "0 !important",
-              fontWeight: "bold",
+              fontWeight: "500",
             },
             "& .MuiChip-deleteIcon": {
-              height: "14px",
-              width: "14px",
-              color: "var(--title-color) !important",
+              height: "13px",
+              width: "13px",
+              color: "var(--text-muted) !important",
             },
           },
           "& .MuiAutocomplete-endAdornment svg": {
-            color: "var(--title-color) !important",
+            color: "var(--text-muted) !important",
           },
+          "& svg": {
+            color: "var(--text-muted) !important",
+          },
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+          border: "1px solid var(--border) !important",
+          borderRadius: "9px !important",
         },
         "& fieldset": {
-          height: "40px",
           border: "1px solid var(--border) !important",
-          "&:hover, &:active, &:focus": {
-            height: "40px !important",
-          },
+          borderRadius: "9px !important",
         },
       },
+
+      /* ── MUI Autocomplete ─────────────────────────────────────────────────── */
       ".MuiAutocomplete-root": {
         width: "100% !important",
       },
       ".MuiAutocomplete-popper": {
-        borderRadius: "4px",
-        backgroundColor: "var(--skeleton-background)",
+        borderRadius: "10px !important",
+        overflow: "hidden",
         ".MuiPaper-root": {
           color: "var(--title-color) !important",
-          backgroundColor: "transparent",
+          backgroundColor: "var(--popper-background) !important",
+          border: "1px solid var(--border-strong)",
+          borderRadius: "10px !important",
+          boxShadow: "var(--box-shadow-lg) !important",
           "& .MuiAutocomplete-listbox": {
-            padding: "4px",
+            padding: "6px",
             "& .MuiAutocomplete-option": {
-              borderRadius: "4px",
-              "&:hover, &:focus": {
-                backgroundColor: "var(--background)",
+              borderRadius: "6px",
+              fontSize: "13.5px",
+              fontFamily: "'Inter', sans-serif",
+              minHeight: "36px",
+              "&:hover, &:focus, &[aria-selected=true]": {
+                backgroundColor: "var(--btn-hover) !important",
               },
             },
           },
         },
       },
+
+      /* ── MUI Box ──────────────────────────────────────────────────────────── */
+      ".MuiBox-root": {
+        width: "260px",
+        position: "relative",
+      },
+
+      /* ── Base Popper ──────────────────────────────────────────────────────── */
       ".base-Popper-root": {
         "& .MuiPaper-root": {
-          backgroundColor: "var(--background)",
-          border: "1px solid var(--border)",
-          borderRadius: "8px",
+          backgroundColor: "var(--popper-background)",
+          border: "1px solid var(--border-strong)",
+          borderRadius: "10px",
+          boxShadow: "var(--box-shadow-lg)",
         },
       },
+
+      /* ── Editor Field (dashed) ────────────────────────────────────────────── */
       ".editor": {
         "& .MuiOutlinedInput-root": {
           alignItems: "center",
-          opacity: "0.5",
           "& .MuiInputAdornment-root": {
-            height: "1.5em",
-            width: "1.5em",
+            height: "1.4em",
+            width: "1.4em",
             "& svg": {
               height: "100%",
               width: "100%",
-              color: "var(--title-color)",
+              color: "var(--text-muted) !important",
             },
           },
-          "& fieldset": {
+          "& .MuiOutlinedInput-notchedOutline": {
             borderStyle: "dashed !important",
-          },
-          "&:hover, &:active, &focus": {
-            "& fieldset": {
-              borderStyle: "dashed !important",
-            },
           },
         },
       },
-      ".root-divider": {
-        width: "100%",
-        backgroundColor: "var(--border) !important",
-      },
+
+
+      /* ── Login modal ──────────────────────────────────────────────────────── */
       ".login-modal-root": {
         "& .MuiTextField-root": {
           width: "260px !important",
@@ -210,6 +157,18 @@ export const GlobalStyles = (
             width: "260px !important",
           },
         },
+      },
+
+      /* ── MUI Modal backdrop ───────────────────────────────────────────────── */
+      ".MuiModal-backdrop": {
+        backdropFilter: "blur(4px)",
+        backgroundColor: "rgba(0,0,0,0.45) !important",
+      },
+
+      /* ── MUI Divider ──────────────────────────────────────────────────────── */
+      ".root-divider": {
+        width: "100%",
+        borderColor: "var(--border) !important",
       },
     }}
   />

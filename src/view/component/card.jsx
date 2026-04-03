@@ -108,9 +108,6 @@ const Card = (props) => {
                     <Editor
                       mode={cardDetails.extraFields.Editor[0]?.language}
                       dark={theme === "dark"}
-                      // onChange={(e) => {
-                      //    updatejsValue(e);
-                      // }}
                       editable={false}
                       value={cardDetails.extraFields.Editor[0]?.value}
                       maxLines={10}

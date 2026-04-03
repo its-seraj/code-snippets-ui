@@ -8,15 +8,10 @@ export const CustomPopper = (props) => {
   const { anchorEl, isPopperOpen, popperPlacement, setExtraFields } = props;
 
   const clickHandler = (value) => {
-    setExtraFields((prev) => {
-      if (prev?.[value]) {
-        prev[value].push({});
-      } else {
-        prev[value] = [{}];
-      }
-      console.log(prev);
-      return prev;
-    });
+    setExtraFields((prev) => ({
+      ...prev,
+      [value]: prev?.[value] ? [...prev[value], {}] : [{}],
+    }));
   };
 
   return (

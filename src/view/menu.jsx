@@ -1,29 +1,20 @@
-import SearchIcon from "@mui/icons-material/Search";
-import { TextField, InputAdornment } from "@mui/material";
-
-const Menu = (props) => {
-  const { search, setSearch } = props;
-
+const Menu = ({ search, setSearch }) => {
   return (
-    <>
-      <div className="menu">
-        <TextField
-          id="outlined-basic"
-          label=""
-          variant="outlined"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          autoComplete="off"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </div>
-    </>
+    <div className="search-wrapper">
+      <svg className="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        className="search-input"
+        type="text"
+        placeholder="Search snippets..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        autoComplete="off"
+        spellCheck="false"
+      />
+    </div>
   );
 };
 

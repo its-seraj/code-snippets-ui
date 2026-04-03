@@ -15,10 +15,11 @@ export const Editor = (props) => {
         mode={props.mode}
         theme={props.dark ? "monokai" : "github"}
         onChange={props.onChange}
-        fontSize={14}
-        showPrintMargin={true}
+        fontSize={13}
+        fontFamily='"JetBrains Mono", "Fira Code", monospace'
+        showPrintMargin={false}
         showGutter={false}
-        highlightActiveLine={true}
+        highlightActiveLine={false}
         value={props.value}
         wrapEnabled={true}
         setOptions={{
@@ -26,11 +27,13 @@ export const Editor = (props) => {
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
           enableSnippets: true,
-          showLineNumbers: true,
+          showLineNumbers: false,
           tabSize: 2,
           readOnly: !props.editable,
-          maxLines: props.maxLines || 2,
+          minLines: 1,
+          maxLines: props.maxLines || Infinity,
         }}
+        style={{ boxSizing: "unset" }}
       />
     )
   );

@@ -1,34 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Roboto:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
 * {
-  font-family: "Fira Code", monospace;
-  font-optical-sizing: auto;
-  /* font-weight: <weight>; */
-  font-style: normal;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+
+code, pre, .ace_editor, .mono {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
 }
 
 .light-mode {
-  --background: #FFFFFF;
-  --border: #b4b4b444;
-  --title-color: rgb(9, 9, 11, 0.8);
-  --label-background: rgb(244, 244, 245);
-  --label-color: rgb(24, 24, 27);
-  --input-bg-image: linear-gradient(#00000015, #00000015);
-  --box-shadow: #f0f0f0a3;
-  --btn-hover: #eeeeee;
-  --skeleton-background: #ccc;
-  --popper-background: #FFFFFF;
+  --background: #ffffff;
+  --background-secondary: #f9f9fb;
+  --background-tertiary: #f2f2f5;
+  --border: rgba(0, 0, 0, 0.07);
+  --border-strong: rgba(0, 0, 0, 0.13);
+  --title-color: #111112;
+  --text-secondary: #60646c;
+  --text-muted: #8b8d98;
+  --label-background: #f0f0f3;
+  --label-color: #2e3036;
+  --input-bg: #ffffff;
+  --box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  --box-shadow-md: 0 4px 12px rgba(0,0,0,0.07);
+  --box-shadow-lg: 0 8px 24px rgba(0,0,0,0.09);
+  --btn-hover: #f2f2f5;
+  --btn-primary: #111112;
+  --btn-primary-text: #ffffff;
+  --skeleton-background: #ebebef;
+  --skeleton-shimmer: #f5f5f8;
+  --accent: #5b5bd6;
+  --accent-hover: #4a4ac4;
+  --accent-soft: #ededfa;
+  --danger: #e5484d;
+  --danger-soft: #fff0f0;
+  --navbar-bg: rgba(255, 255, 255, 0.82);
+  --card-bg: #ffffff;
+  --card-hover-border: rgba(0,0,0,0.13);
+  --scrollbar: #e2e2e8;
+  --popper-background: #ffffff;
+  --input-bg-image: none;
 }
 
 .dark-mode {
-  --background: #09090B;
-  --border: #77777744;
-  --title-color: rgb(250, 250, 250, 0.8);
-  --label-background: rgb(39, 39, 42);
-  --label-color: rgb(250, 250, 250);
-  --input-bg-image: linear-gradient(#ffffff15, #ffffff15);
-  --box-shadow: #161616a3;
-  --btn-hover: #111111;
-  --skeleton-background: #121212;
-  --popper-background: #18181B;
+  --background: #0d0d0f;
+  --background-secondary: #111113;
+  --background-tertiary: #19191d;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --title-color: #ededef;
+  --text-secondary: #8b8d98;
+  --text-muted: #60646c;
+  --label-background: #232326;
+  --label-color: #ededef;
+  --input-bg: #111113;
+  --box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  --box-shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+  --box-shadow-lg: 0 8px 24px rgba(0,0,0,0.6);
+  --btn-hover: #1c1c20;
+  --btn-primary: #ededef;
+  --btn-primary-text: #0d0d0f;
+  --skeleton-background: #1c1c20;
+  --skeleton-shimmer: #232326;
+  --accent: #9e9efc;
+  --accent-hover: #b5b5fd;
+  --accent-soft: #1a1a3e;
+  --danger: #f2555a;
+  --danger-soft: #1f1315;
+  --navbar-bg: rgba(13, 13, 15, 0.82);
+  --card-bg: #111113;
+  --card-hover-border: rgba(255,255,255,0.12);
+  --scrollbar: #232326;
+  --popper-background: #19191d;
+  --input-bg-image: none;
 }

@@ -11,17 +11,19 @@ const style = {
   width: "800px",
   height: "620px",
   bgcolor: "var(--background)",
-  border: "none",
+  border: "1px solid var(--border-strong)",
   outline: "none",
-  borderRadius: "12px",
-  padding: "2px",
+  borderRadius: "16px",
+  padding: "0",
+  overflow: "hidden",
+  boxShadow: "0 24px 48px rgba(0,0,0,0.18)",
   "@media (max-width: 820px)": {
-    width: "90vw !important",
+    width: "92vw !important",
+    height: "90vh !important",
   },
 };
 
 const BasicModal = (props) => {
-  console.log("props inside Modal", props);
   const { modalOpen, setModalOpen, modalAction, cardDetails, refresh } = props;
 
   const handleClose = () => setModalOpen(false);

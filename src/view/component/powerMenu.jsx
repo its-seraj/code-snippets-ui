@@ -2,7 +2,7 @@ import * as React from "react";
 import { verifyLogin } from "../helper/token";
 import { useEffect } from "react";
 
-export default function PowerMenu() {
+export default function PowerMenu({ onAuthChange }) {
   const [isLoginOpen, setIsLoginOpen] = React.useState(false);
   const [resource, setResource] = React.useState();
   const [passkey, setPasskey] = React.useState("");
@@ -28,6 +28,7 @@ export default function PowerMenu() {
           setLoginError("");
           setIsLoginOpen(false);
           setResource(true);
+          onAuthChange?.(true);
         } else {
           setLoginError("Incorrect passkey. Please try again.");
           setPasskey("");
@@ -46,6 +47,7 @@ export default function PowerMenu() {
       .then(() => {
         localStorage.removeItem("resource");
         setResource(undefined);
+        onAuthChange?.(false);
       })
       .catch(console.error);
   };

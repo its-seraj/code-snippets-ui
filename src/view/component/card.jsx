@@ -12,7 +12,7 @@ import EditorModal from "./editorModal.jsx";
 import { useTheme } from "../../ThemeProvider.jsx";
 
 const Card = (props) => {
-  const { cardDetails, cardUx, refresh } = props;
+  const { cardDetails, cardUx, refresh, isLoggedIn } = props;
   const [moreOpen, setMoreOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalAction, setModalAction] = useState("");
@@ -60,21 +60,23 @@ const Card = (props) => {
   return (
     <>
       <div className="card-item">
-        <div className={"card-action"}>
-          <div className={moreOpen ? "card-action-expanded" : "card-action-collapsed"}>
-            <ExpandMoreRoundedIcon onClick={toggleMoreButton} className="more" />
-            <div className={moreOpen ? "action-btn-root" : "hide"}>
-              <div onClick={() => openModelHandler("card")}>
-                <EditNoteIcon />
-                <span>Edit</span>
-              </div>
-              <div onClick={deleteCardHandler}>
-                <DeleteSweepIcon />
-                <span>Delete</span>
+        {isLoggedIn && (
+          <div className={"card-action"}>
+            <div className={moreOpen ? "card-action-expanded" : "card-action-collapsed"}>
+              <ExpandMoreRoundedIcon onClick={toggleMoreButton} className="more" />
+              <div className={moreOpen ? "action-btn-root" : "hide"}>
+                <div onClick={() => openModelHandler("card")}>
+                  <EditNoteIcon />
+                  <span>Edit</span>
+                </div>
+                <div onClick={deleteCardHandler}>
+                  <DeleteSweepIcon />
+                  <span>Delete</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* <div className="run-code-icon" onClick={() => openModelHandler("editor")}>
           <RunCodeIcon />

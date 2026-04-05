@@ -21,7 +21,7 @@ const useColumnCount = () => {
 };
 
 const CardRoot = (props) => {
-  const { modalOpenRoot, setModalOpenRoot, search, setSearch } = props;
+  const { modalOpenRoot, setModalOpenRoot, search, setSearch, isLoggedIn } = props;
 
   const [counts, setCounts] = useState();
   const [cards, setCards] = useState([]);
@@ -120,7 +120,7 @@ const CardRoot = (props) => {
         {(cards.length > 0 ? columns : Array.from({ length: colCount }, () => [])).map((col, ci) => (
           <div key={ci} className="card-column">
             {col.map((currCard) => (
-              <Card key={currCard?.cardUuid} cardDetails={currCard} refresh={() => fetchCards(true)} />
+              <Card key={currCard?.cardUuid} cardDetails={currCard} refresh={() => fetchCards(true)} isLoggedIn={isLoggedIn} />
             ))}
             {isLoading && <CardSkeleton />}
           </div>

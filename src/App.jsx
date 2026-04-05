@@ -5,11 +5,13 @@ import CardRoot from "./view/cardRoot";
 import PowerMenu from "./view/component/powerMenu";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
+import { verifyLogin } from "./view/helper/token";
 
 function App() {
   const { theme, toggleTheme } = useTheme();
   const [modalOpenRoot, setModalOpenRoot] = useState(false);
   const [search, setSearch] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(() => verifyLogin());
 
   return (
     <>
@@ -50,7 +52,7 @@ function App() {
             )}
           </button>
 
-          <PowerMenu />
+          <PowerMenu onAuthChange={setIsLoggedIn} />
 
           <button className="btn-primary" onClick={() => setModalOpenRoot(true)}>
             <AddIcon style={{ width: 16, height: 16 }} />
@@ -65,6 +67,7 @@ function App() {
           setModalOpenRoot={setModalOpenRoot}
           search={search}
           setSearch={setSearch}
+          isLoggedIn={isLoggedIn}
         />
       </div>
     </>

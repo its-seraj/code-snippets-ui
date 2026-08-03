@@ -1,40 +1,22 @@
 import * as React from "react";
+import { useEffect, useRef } from "react";
+import { FaceLockScreen } from "react-face-totp";
 import { verifyLogin } from "../helper/token";
-import { useEffect } from "react";
 
 export default function PowerMenu({ onAuthChange }) {
   const [isLoginOpen, setIsLoginOpen] = React.useState(false);
   const [resource, setResource] = React.useState();
-  const [passkey, setPasskey] = React.useState("");
-  const [loginError, setLoginError] = React.useState("");
 
   useEffect(() => {
+    console.log("gfcvhjkgg2343")
     setResource(verifyLogin());
   }, []);
 
-  const loginSubmit = (value) => {
-    const url = `${window._env_.CODE_SNIPPETS_BACKEND}/login`;
-    fetch(url, {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ passkey: value }),
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        if (data.success === true) {
-          localStorage.setItem("resource", data.resource);
-          setPasskey("");
-          setLoginError("");
-          setIsLoginOpen(false);
-          setResource(true);
-          onAuthChange?.(true);
-        } else {
-          setLoginError("Incorrect passkey. Please try again.");
-          setPasskey("");
-        }
-      })
-      .catch(() => setLoginError("Unable to connect. Please check your network."));
+  const handleUnlocked = () => {
+    const isAuth = verifyLogin() || true;
+    setResource(isAuth);
+    setIsLoginOpen(false);
+    onAuthChange?.(true);
   };
 
   const logoutSubmit = () => {
@@ -52,12 +34,21 @@ export default function PowerMenu({ onAuthChange }) {
       .catch(console.error);
   };
 
-  const handlePasskeyChange = (e) => {
-    const raw = e.target.value.replace(/\D/g, "").slice(0, 6);
-    setPasskey(raw);
-    setLoginError("");
-    if (raw.length === 6) loginSubmit(raw);
+  const authRef = useRef(null);
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (authRef.current && !authRef.current.contains(event.target)) {
+      setIsLoginOpen(false);
+    }
   };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
 
   return (
     <>
@@ -81,52 +72,14 @@ export default function PowerMenu({ onAuthChange }) {
         </button>
       )}
 
-      {/* Login Modal */}
+      {/* Login Modal using react-face-totp */}
       {isLoginOpen && (
-        <div className="login-overlay" onClick={(e) => { if (e.target === e.currentTarget) { setIsLoginOpen(false); setPasskey(""); setLoginError(""); } }}>
-          <div className="login-card">
-            <div className="login-card-header">
-              <div className="login-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
-              </div>
-              <div>
-                <h2 className="login-card-title">Authenticate</h2>
-                <p className="login-card-subtitle">Enter your 6-digit access code</p>
-              </div>
-              <button className="login-close-btn" onClick={() => { setIsLoginOpen(false); setPasskey(""); setLoginError(""); }}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <line x1="18" y1="6" x2="6" y2="18"/>
-                  <line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-              </button>
-            </div>
-
-            <div className="login-card-body">
-              <div className="passkey-dots">
-                {Array(6).fill(0).map((_, i) => (
-                  <div key={i} className={`passkey-dot${i < passkey.length ? " filled" : ""}${i === passkey.length ? " active" : ""}`} />
-                ))}
-              </div>
-
-              <input
-                className="passkey-hidden-input"
-                type="tel"
-                inputMode="numeric"
-                maxLength={6}
-                value={passkey}
-                onChange={handlePasskeyChange}
-                autoFocus
-                autoComplete="off"
-              />
-
-              {loginError && <p className="login-error">{loginError}</p>}
-
-              <p className="login-hint">Use your keyboard to enter the code</p>
-            </div>
-          </div>
+        <div ref={authRef} className="auth-container" style={{ position: "relative", zIndex: 9999, height: "content-fit" }}>
+          <FaceLockScreen
+            appName="Code Snippets"
+            onUnlocked={handleUnlocked}
+            onClose={() => setIsLoginOpen(false)}
+          />
         </div>
       )}
     </>

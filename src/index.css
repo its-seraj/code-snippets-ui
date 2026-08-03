@@ -911,17 +911,12 @@ iframe .decorationsOverviewRuler { width: 4px !important; }
 
 
 /* ─── Login Modal ──────────────────────────────────────────────────────────── */
-.login-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 300;
+.auth-container > div {
+  height: fit-content;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fade-in 0.15s ease;
+  background-color: unset !important;
 }
 
 @keyframes fade-in {

@@ -14,10 +14,10 @@
     "@mui/icons-material": "^5.15.14",
     "@mui/material": "^5.15.14",
     "jwt-decode": "^4.0.0",
-    "passcode-input": "^1.0.0",
     "react": "^18.2.0",
     "react-ace": "^11.0.1",
     "react-dom": "^18.2.0",
+    "react-face-totp": "^1.0.3",
     "vite-plugin-mkcert": "^1.17.5"
   },
   "devDependencies": {

@@ -7,7 +7,7 @@ const getCookieValue = (name) => {
 
 export const verifyLogin = () => {
   try {
-    const token = getCookieValue("resource") || localStorage.getItem("resource");
+    const token = getCookieValue("codesnip") || localStorage.getItem("resource");
     if (token) {
       const decodedToken = jwtDecode(token);
       const now = new Date().getTime() / 1000;

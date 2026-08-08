@@ -41,7 +41,7 @@ const CardRoot = (props) => {
   cards.forEach((card, i) => columns[i % colCount].push(card));
 
   const fetchCards = async (reset = false) => {
-    if (isLoadingRef.current) return;
+    if (isLoadingRef.current && !reset) return;
     if (!reset && !hasMoreRef.current) return;
 
     if (abortControllerRef.current) abortControllerRef.current.abort();
@@ -82,9 +82,19 @@ const CardRoot = (props) => {
       });
   };
 
-  useEffect(() => { fetchCards(true); }, []);
-
   useEffect(() => {
+    hasMoreRef.current = true;
+    setHasMore(true);
+    pageRef.current = 1;
+    fetchCards(true);
+  }, [isLoggedIn]);
+
+  const isSearchMounted = useRef(false);
+  useEffect(() => {
+    if (!isSearchMounted.current) {
+      isSearchMounted.current = true;
+      return;
+    }
     if (debounceTimer.current) clearTimeout(debounceTimer.current);
     debounceTimer.current = setTimeout(() => {
       hasMoreRef.current = true;

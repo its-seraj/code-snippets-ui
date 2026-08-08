@@ -8,7 +8,6 @@ export default function PowerMenu({ onAuthChange }) {
   const [resource, setResource] = React.useState();
 
   useEffect(() => {
-    console.log("gfcvhjkgg2343")
     setResource(verifyLogin());
   }, []);
 
@@ -31,7 +30,12 @@ export default function PowerMenu({ onAuthChange }) {
         setResource(undefined);
         onAuthChange?.(false);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        localStorage.removeItem("resource");
+        setResource(undefined);
+        onAuthChange?.(false);
+      });
   };
 
   const authRef = useRef(null);
